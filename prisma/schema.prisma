@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime  @default(now())
+  products     Product[]
+}
+
+model Product {
+  id        String         @id @default(cuid())
+  userId    String
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  sku       String?
+  archived  Boolean        @default(false)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  batches   ProductBatch[]
+  sales     Sale[]
+
+  @@index([userId])
+}
+
+model ProductBatch {
+  id            String   @id @default(cuid())
+  productId     String
+  product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId        String
+  quantity      Int
+  unitCostCents Int
+  acquiredAt    DateTime @default(now())
+  createdAt     DateTime @default(now())
+
+  @@index([productId])
+  @@index([userId])
+}
+
+model Sale {
+  id                  String   @id @default(cuid())
+  productId           String
+  product             Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId              String
+  quantity            Int
+  unitPriceCents       Int
+  unitCostAtSaleCents  Int
+  soldAt              DateTime @default(now())
+  createdAt           DateTime @default(now())
+
+  @@index([productId])
+  @@index([userId])
+}
