@@ -198,6 +198,7 @@ export default async function ProductDetailPage({
                   <TableHead className="text-right">Sale price</TableHead>
                   <TableHead className="text-right">Revenue</TableHead>
                   <TableHead className="text-right">Profit</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -220,6 +221,17 @@ export default async function ProductDetailPage({
                       </TableCell>
                       <TableCell className="text-right">
                         {formatCents(profitCents)}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Link
+                          href={`/products/${product.id}/sales/${sale.id}/edit`}
+                          className={buttonVariants({
+                            variant: "outline",
+                            size: "icon",
+                          })}
+                        >
+                          <Pencil />
+                        </Link>
                       </TableCell>
                     </TableRow>
                   );
