@@ -6,7 +6,7 @@ import { requireUserId } from "@/lib/session";
 import { computeAvgUnitCostCents } from "@/lib/analytics";
 import { formatCents } from "@/lib/format";
 import { ArchiveProductButton } from "@/components/archive-product-button";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -69,28 +69,31 @@ export default async function ProductDetailPage({
           )}
         </div>
         <div className="flex gap-2">
-          <Button
-            variant="outline"
-            render={<Link href={`/products/${product.id}/edit`} />}
+          <Link
+            href={`/products/${product.id}/edit`}
+            className={buttonVariants({ variant: "outline" })}
           >
             <Pencil />
             Edit
-          </Button>
+          </Link>
           <ArchiveProductButton
             productId={product.id}
             archived={product.archived}
           />
-          <Button
-            variant="outline"
-            render={<Link href={`/products/${product.id}/batches/new`} />}
+          <Link
+            href={`/products/${product.id}/batches/new`}
+            className={buttonVariants({ variant: "outline" })}
           >
             <Plus />
             Add batch
-          </Button>
-          <Button render={<Link href={`/products/${product.id}/sales/new`} />}>
+          </Link>
+          <Link
+            href={`/products/${product.id}/sales/new`}
+            className={buttonVariants()}
+          >
             <Receipt />
             Record sale
-          </Button>
+          </Link>
         </div>
       </div>
 

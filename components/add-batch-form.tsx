@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { addBatch } from "@/lib/actions/batches";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -44,12 +44,12 @@ export function AddBatchForm({ productId }: { productId: string }) {
         <Button type="submit" disabled={isPending}>
           {isPending ? "Saving..." : "Add batch"}
         </Button>
-        <Button
-          variant="outline"
-          render={<Link href={`/products/${productId}`} />}
+        <Link
+          href={`/products/${productId}`}
+          className={buttonVariants({ variant: "outline" })}
         >
           Cancel
-        </Button>
+        </Link>
       </div>
     </form>
   );

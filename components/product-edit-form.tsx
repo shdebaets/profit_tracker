@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { updateProduct } from "@/lib/actions/products";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -36,9 +36,12 @@ export function ProductEditForm({
         <Button type="submit" disabled={isPending}>
           {isPending ? "Saving..." : "Save changes"}
         </Button>
-        <Button variant="outline" render={<Link href={`/products/${productId}`} />}>
+        <Link
+          href={`/products/${productId}`}
+          className={buttonVariants({ variant: "outline" })}
+        >
           Cancel
-        </Button>
+        </Link>
       </div>
     </form>
   );

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { createProduct } from "@/lib/actions/products";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -70,9 +70,12 @@ export default function NewProductPage() {
               <Button type="submit" disabled={isPending}>
                 {isPending ? "Saving..." : "Save product"}
               </Button>
-              <Button variant="outline" render={<Link href="/products" />}>
+              <Link
+                href="/products"
+                className={buttonVariants({ variant: "outline" })}
+              >
                 Cancel
-              </Button>
+              </Link>
             </div>
           </form>
         </CardContent>
